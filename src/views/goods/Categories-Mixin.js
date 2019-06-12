@@ -6,14 +6,14 @@ export default {
                 pagenum:1,
                 pagesize:5
             },
-            total:0
-            // addDialogFormVisible:false,
-            // addRules,
-            // addForm: {
-            //     cat_id:0,
-            //     cat_name:"",
-            //     cat_level:0
-            // }
+            total:0,
+            addDialogFormVisible:false,
+            addRules,
+            addForm: {
+                cat_id:0,
+                cat_name:"",
+                cat_level:0
+            }
             
 
         }

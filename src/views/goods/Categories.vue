@@ -51,7 +51,7 @@
       >
       </el-pagination>
     </el-card>
-    <el-dialog title="添加角色" :visible.sync="addDialogFormVisible">
+    <el-dialog title="添加商品分类" :visible.sync="addDialogFormVisible">
       <el-form
         :model="addForm"
         autocomplete="off"
