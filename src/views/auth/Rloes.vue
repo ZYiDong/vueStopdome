@@ -16,7 +16,12 @@
               :key="item.id"
             >
               <el-col :span="4">
-                <el-tag closable type="tag.type">{{ item.authName }} </el-tag>
+                <el-tag
+                  closable
+                  type="tag.type"
+                  @close="delRights(scope.row, item.id)"
+                  >{{ item.authName }}
+                </el-tag>
                 <i class="el-icon-caret-right"></i>
               </el-col>
               <el-col :span="20">
@@ -27,17 +32,21 @@
                   v-for="(subItem, subIndex) in item.children"
                   :key="subIndex.id"
                 >
-                  <el-col :span="4">
-                    <el-tag closable type="success">{{
-                      subItem.authName
-                    }}</el-tag>
+                  <el-col :span="6">
+                    <el-tag
+                      closable
+                      type="success"
+                      @close="delRights(scope.row, subItem.id)"
+                      >{{ subItem.authName }}</el-tag
+                    >
                     <i class="el-icon-caret-right"></i>
                   </el-col>
-                  <el-col :span="20">
+                  <el-col :span="18">
                     <el-tag
-                      v-for="(sItem, sIndex) in subItem.children"
+                      v-for="sItem in subItem.children"
                       :key="sItem.id"
                       closable
+                      @close="delRights(scope.row, sItem.id)"
                       type="warning"
                     >
                       {{ sItem.authName }}
@@ -65,7 +74,12 @@
                 @click="delRoles(scope.row.id)"
               >
               </el-button>
-              <el-button type="primary" icon="el-icon-setting"> </el-button>
+              <el-button
+                type="primary"
+                icon="el-icon-setting"
+                @click="openRighsDialog(scope.row)"
+              >
+              </el-button>
             </el-button-group>
           </template>
         </el-table-column>
@@ -109,6 +123,23 @@
       <div slot="footer" class="dialog-footer">
         <el-button @click="editDialogFormVisible = false">取 消</el-button>
         <el-button type="primary" @click="editRoles()">确 定</el-button>
+      </div>
+    </el-dialog>
+    <el-dialog title="分配权限" :visible.sync="rightDialogFormVisible">
+      <el-tree
+        :data="rightsTreeData"
+        show-checkbox
+        node-key="id"
+        :default-expand-all="true"
+        :default-checked-keys="checkedIdArr"
+        :props="defaultProps"
+        ref="tree"
+      >
+      </el-tree>
+
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="rightDialogFormVisible = false">取 消</el-button>
+        <el-button type="primary" @click="disRight()">确 定</el-button>
       </div>
     </el-dialog>
   </div>
