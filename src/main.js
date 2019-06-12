@@ -2,6 +2,9 @@ import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
 
+import MyBread from './components/myBread';
+Vue.component("my-bread",MyBread)
+
 // 引入全局css样式控制文件
 import "./assets/css/global.css";
 
